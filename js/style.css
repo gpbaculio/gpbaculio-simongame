@@ -8,17 +8,19 @@ div {
   position:relative;
   z-index: 2;
 }
+.online {
+  background-color: #78C37B;
+  color: white;
+}
+
 body {
   background-color: #006400;
   color: #333;
   font-family: 'Raleway', sans-serif;
   font-weight:400;
 }
-.article {
+.channel {
   background-color: white !important;
-}
-.article:hover {
-  border-left: solid #006400 3px;
 }
 .title {
   width:450px;
