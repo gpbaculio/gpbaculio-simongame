@@ -49,7 +49,7 @@ class Channel extends Component {
           <table style={{width: '100%'}}>
             <tr>
               <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', marginLeft: '20px', marginRight: '20px'}}><img style={{width: '50px', height: '50px', borderRadius: '50%',textAlign: 'left', position: 'relative'}} src={this.state.logo} /></td>
-              <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', marginLeft: '20px', marginRight: '20px'}}><span style={{marginLeft:'15px', width: '100px', marginRight: '15px'}}> {this.state.displayName} </span></td>
+              <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', marginLeft: '20px', marginRight: '20px'}}><span style={{marginLeft:'15px', width: '100px', marginRight: '15px'}}> <a className="channelLink" style={Boolean(this.state.online==='online') ? { color: 'white '} : { color: 'black'}} href={"https://www.twitch.tv/".concat(this.state.displayName)} target="_blank">{this.state.displayName}</a> </span></td>
               <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', width: '250px', height:'100px',marginLeft: '20px', marginRight: '20px'}}><span style={{fontSize: '12px'}}>{Boolean(this.state.online === 'online') ? `${this.state.game} : ${this.state.status}`: 'Offline'}</span></td>
             </tr>
           </table>
@@ -114,8 +114,8 @@ class App extends Component {
             <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'offline'})} className={Boolean(this.state.show==='offline')? 'active' : ''}>Offline</button>
               {this._renderChannels()}
               <div style={{marginTop: '40px'}}>
-                <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/"> link </a> </span>
-                <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-twitchtv-api"> link </a> </span>
+                <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/" target="_blank" > link </a> </span>
+                <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-twitchtv-api" target="_blank" > link </a> </span>
             </div>
             </div>
           <span className="footer"> Developed by Glendon Philipp Baculio </span>

@@ -15,7 +15,13 @@ div {
   background-color: #78C37B;
   color: white;
 }
-
+.channelLink {
+  color: black;
+  text-decoration: none;
+}
+.channelLink:hover {
+  text-decoration: underline;
+}
 body {
   background-color: #006400;
   color: #333;
