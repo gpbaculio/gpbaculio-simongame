@@ -115,7 +115,7 @@ class App extends Component {
               {this._renderChannels()}
               <div style={{marginTop: '40px'}}>
                 <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/"> link </a> </span>
-                <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-wikipedia-viewer"> link </a> </span>
+                <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-twitchtv-api"> link </a> </span>
             </div>
             </div>
           <span className="footer"> Developed by Glendon Philipp Baculio </span>
