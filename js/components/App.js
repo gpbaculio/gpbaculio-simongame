@@ -109,12 +109,12 @@ class App extends Component {
           <span className="title"> Reactjs Twitchtv JSON API </span>
             <div className="container">
             <span> Twitch Streamers </span>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'all'})} >All</button>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'online'})} className={Boolean(this.state.show==='online')?'online' : ''} >Online</button>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'offline'})} className={Boolean(this.state.show==='offline')? 'offline' : ''}>Offline</button>
+            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'all'})} className={Boolean(this.state.show==='all')?'active' : ''}>All</button>
+            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'online'})} className={Boolean(this.state.show==='online')?'active' : ''} >Online</button>
+            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'offline'})} className={Boolean(this.state.show==='offline')? 'active' : ''}>Offline</button>
               {this._renderChannels()}
               <div style={{marginTop: '40px'}}>
-                <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-wikipedia-viewer.herokuapp.com/"> link </a> </span>
+                <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/"> link </a> </span>
                 <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-wikipedia-viewer"> link </a> </span>
             </div>
             </div>

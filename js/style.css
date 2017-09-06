@@ -8,6 +8,9 @@ div {
   position:relative;
   z-index: 2;
 }
+.active {
+  font-weight: bold;
+}
 .online {
   background-color: #78C37B;
   color: white;
