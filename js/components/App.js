@@ -1,127 +1,61 @@
 import 'babel-polyfill'
 import React, { Component } 
   from 'react';
-import $ from 'jquery';
-import 'jquery-ui';
 
-class Channel extends Component {
-  state = {
-    game:'',
-    online:'offline',
-    displayName:'',
-    logo: '',
-    status: '',
-  }
-  componentWillMount = async () => {
-    const { channelData } = this.props;
-    if (channelData.res.stream === null) {
-        await this.setState((prevState, props) => ({
-          game: 'Offline',
-          online: 'offline',
-          logo: channelData.data.logo,
-          displayName: channelData.data.display_name,
-          status: channelData.data.status
-        }));
-      } else if (channelData.res.stream === undefined) {
-        await this.setState((prevState, props) => ({
-          game: 'Account Closed',
-          online: 'offline',
-          logo: channelData.data.logo,
-          displayName: channelData.data.display_name,
-          status: channelData.data.status
-        }));
-      } else {
-        await this.setState((prevState, props) => {
-                return {
-                    game: channelData.res.stream.game,
-                    online: 'online',
-                    logo: channelData.data.logo,
-                    displayName: channelData.data.display_name,
-                    status: channelData.data.status
-              }
-            });
-      };
-  }
-  render() {
-    return (
-      <div style={Boolean(this.props.show === this.state.online || this.props.show === 'all' ) ? { borderRadius: '3px', padding: '5px', marginTop: '15px' } : {display: 'none'} } className="channel"> 
-        <div style={{ fontSize: '18px',textAlign:'center' }} className={Boolean(this.state.online==='online') ? "online" : ""}>
-          <table style={{width: '100%'}}>
-            <tr>
-              <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', marginLeft: '20px', marginRight: '20px'}}><img style={{width: '50px', height: '50px', borderRadius: '50%',textAlign: 'left', position: 'relative'}} src={this.state.logo} /></td>
-              <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', marginLeft: '20px', marginRight: '20px'}}><span style={{marginLeft:'15px', width: '100px', marginRight: '15px'}}> <a className="channelLink" style={Boolean(this.state.online==='online') ? { color: 'white '} : { color: 'black'}} href={"https://www.twitch.tv/".concat(this.state.displayName)} target="_blank">{this.state.displayName}</a> </span></td>
-              <td style={{padding:'5px',verticalAlign: 'middle', textAlign: 'center', width: '250px', height:'100px',marginLeft: '20px', marginRight: '20px'}}><span style={{fontSize: '12px'}}>{Boolean(this.state.online === 'online') ? `${this.state.game} : ${this.state.status}`: 'Offline'}</span></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    )
-  }
-}
 class App extends Component {
 
   state = {
-    channelsData: [],
-    show: 'all'
+    power : false,
+    strict : false,
+    running : false,
+    memoryArray : [],
+    memoryArrayCounter : 0,
+    userArray : [],
+    userArrayCounter : 0,
+    levelCount : 1,
+    tempColor:'',
+    runMemory:'',
+    matchingArrays:true,
+    tempo:''
   }
 
-  componentWillMount() {
-    let channels = ["freecodecamp","ns_vp","ESL_SC2"];
-      let setState = async (result) => {
-        await this.setState((prevState, props) => ({
-                  channelsData:[...prevState.channelsData,result]
-                }));
-      }
-    channels.forEach(function(channel) {
-      function genUrl(type, name) {
-        return 'https://wind-bow.gomix.me/twitch-api/' + type + '/' + name + '?callback=?';
-      }
-        $.ajax({ // 2 ajax requests
-          url: genUrl("channels", channel),
-          async: false,
-          dataType: 'jsonp',
-          success: async function(data) {
-            debugger;
-            $.ajax({
-              url: genUrl("streams", channel),
-              async: false,
-              dataType: 'jsonp',
-              success: async function(res) { // res = result
-                debugger;
-                console.log("data+res = ",{data, res})
-                await setState({data, res});
-              },
-            });
-          },
-        });
-    });
+  componentDidMount() {
+    var colors = ['red','green','yellow','blue'],
+          tone1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+          tone2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
+          tone3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+          tone4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'),
+          buzz  = new Audio('./errorbuzz.mp3'),
+          trumpet = new Audio('./successtrumpet.mp3');
+
   }
-
-  _renderChannels() {
-     return this.state.channelsData.map((channelData, i) => {
-          return <Channel show={this.state.show} channelData={channelData} />
-      })
-    };
-
+  
   render() {
-    return (
-        <div> 
-          <span className="title"> Reactjs Twitchtv JSON API </span>
+
+    let { answer, history, warning } = this.state;
+
+    return (<div><span className="title"> Reactjs Calculator </span>
             <div className="container">
-            <span> Twitch Streamers </span>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'all'})} className={Boolean(this.state.show==='all')?'active' : ''}>All</button>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'online'})} className={Boolean(this.state.show==='online')?'active' : ''} >Online</button>
-            <button style={{margin:'5px', padding: '3px'}} onClick={() => this.setState({ show: 'offline'})} className={Boolean(this.state.show==='offline')? 'active' : ''}>Offline</button>
-              {this._renderChannels()}
+            <div className="color-container">
+              <div className="inline" id="green"></div>
+              <div className="inline" id="red"></div>
+              <div className="inline" id="yellow"></div>
+              <div className="inline" id="blue"></div>
+            </div>
+            <button>start </button>
+            <button style={this.state.strict ? { backgroundColor: 'green', color: 'white' } : { backgroundColor: 'white', color: 'black' }}> strict </button>
+            <button style={this.state.power ? { backgroundColor: 'green', color: 'white' } : { backgroundColor: 'white', color: 'black' }}>{this.state.power ? 'off' : 'on'}</button>
+            <span> count:  {this.state.levelCount} </span>
+            <div> 
               <div style={{marginTop: '40px'}}>
-                <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/" target="_blank" > link </a> </span>
-                <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-twitchtv-api" target="_blank" > link </a> </span>
-            </div>
-            </div>
-          <span className="footer"> Developed by Glendon Philipp Baculio </span>
+                  <span style={{float: 'left'}}> Deployed Heroku App: <a href="https://gpbaculio-twitchtv-api.herokuapp.com/" target="_blank" > link </a> </span>
+                  <span style={{float: 'right'}}> Github Repo: <a href="https://github.com/iamglenbacs/gpbaculio-twitchtv-api" target="_blank" > link </a> </span>
+              </div>
+            </div>  
         </div>
-    )
+        <span className="footer"> Developed by Glendon Philipp Baculio </span>
+    </div>);
   }
 }
 
-export default App
+export default App;
