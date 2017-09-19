@@ -29,7 +29,7 @@
   "devDependencies": {
     "babel-cli": "^6.11.4"
   },
-  "scripts": {
+   "scripts": {
     "build": "webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node ./app.js"
   },

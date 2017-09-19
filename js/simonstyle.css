@@ -9,27 +9,6 @@ div {
   z-index: 2;
 }
 
-.power {
- border: solid  red 1px;
- margin: 3px;
-}
-
-.start {
- border: solid  green 1px;
- margin: 3px;
-}
-
-.strict {
- border: solid  yellow 1px;
- margin: 3px;
-}
-
-.count {
-  border: solid  blue 1px;
-  margin: 3px;
-}
-
-
 .lighten {
   opacity: 0.5;
 }
@@ -40,16 +19,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight:400;
 }
-
-.color-container > div {
-  float:left;
-  height: 147px;
-  width: 147px;
-  background-color: #ECE7EE;
-}
-
 .color-container {
-  box-sizing: border-box;
   width: 300px;
   height: 320px;
   position: relative;
@@ -57,13 +27,21 @@ body {
   margin: auto;
  
 }
+.inline {
+  display: inline-block;
+ 
+}
 #green {
+  height: 150px;
+  width: 150px;
   background-color: green;
   border-radius: 0 100% 0 0;
   border: solid #333333;
   border-width: 2px 2px 1px 1px;
 }
 #yellow {
+  height: 150px;
+  width: 150px;
   background-color: yellow;
   border-radius: 0 0 0 100%;
   margin-top: -5px;
@@ -73,12 +51,16 @@ body {
 
 
 #red {
+  height: 150px;
+  width: 150px;
   background-color: red; 
   border-radius: 100% 0 0 0;
   border: solid #333333;
   border-width: 2px 1px 1px 2px;
 }
 #blue {
+  height: 150px;
+  width: 150px;
   background-color: blue;
   border-radius: 0 0 100% 0;
   margin-top: -5px;

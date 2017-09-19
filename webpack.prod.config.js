@@ -21,8 +21,10 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/public/'
   },
+  devtool: "source-map",
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       minimize: true,
       compress: {
         warnings: false
@@ -32,6 +34,9 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
-    })
+    }),
+     new webpack.LoaderOptionsPlugin({
+    debug: true
+  })
   ]
 };
