@@ -30,7 +30,7 @@
     "babel-cli": "^6.11.4"
   },
    "scripts": {
-    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
+    "build": "webpack --config ./webpack.prod.config.js --progress --colors --hot --module-bind 'css=style.css'",
     "start": "node ./app.js"
   },
   "author": "Glendon Philipp Baculio",

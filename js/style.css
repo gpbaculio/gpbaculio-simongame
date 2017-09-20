@@ -8,25 +8,107 @@ div {
   position:relative;
   z-index: 2;
 }
-
-.power {
- border: solid  red 1px;
- margin: 3px;
+.power:hover {
+  font-weight: 800;
+  cursor: pointer;
 }
-
+.replay:hover {
+  font-weight: 800;
+  cursor: pointer;
+}
+.start:hover {
+  font-weight: 800;
+  cursor: pointer;
+}
+.strict:hover {
+  font-weight: 800;
+  cursor: pointer;
+}
+#red:hover {
+  cursor: pointer;
+opacity: 0.5
+}
+#green:hover {
+  cursor: pointer;
+ opacity: 0.5 
+}
+#yellow:hover {
+  cursor: pointer;
+  opacity: 0.5
+}
+#blue:hover {
+  cursor: pointer;
+  opacity: 0.5
+}
+.active {
+  font-weight: 800;
+}
+.power {
+  margin: 6px !important;
+  width: 45px !important;
+  height: 45px !important;
+  border: solid  red 1.5px;
+  border-radius: 50%;
+  background-color: red;
+  line-height:45px;
+  font-size: 12px;
+}
+.buttons-container {
+  display: table;
+}
 .start {
- border: solid  green 1px;
- margin: 3px;
+  margin: 6px !important;
+  width: 45px !important;
+  height: 45px !important;
+  border: solid  green 1.5px;
+  border-radius: 50%;
+  line-height:45px;
+  font-size: 12px;
 }
 
 .strict {
- border: solid  yellow 1px;
- margin: 3px;
+  margin: 6px !important;
+  width: 45px !important;
+  height: 45px !important;;
+  border: solid  yellow 1.5px;
+  border-radius: 50%;
+  line-height:45px;
+  font-size: 12px;
+}
+
+.replay {
+  margin: 6px !important;
+  width: 45px !important;
+  height: 45px !important;;
+  border: solid  blue 1.5px;
+  border-radius: 50%;
+  line-height:45px;
+  font-size: 12px;
+}
+
+br {
+  content: "";
+  margin: 2px;
+  display: block;
+  font-size: 1%;
 }
 
 .count {
-  border: solid  blue 1px;
-  margin: 3px;
+  margin: 6px !important;
+  width: 35px !important;
+  height: 35px !important;
+  border-style: solid;
+  border-width: 1.5px;
+  border-left-color: red;
+  border-top-color: green;
+  border-right-color: yellow;
+  border-bottom-color: blue;  
+  font-weight: bold;
+  margin: auto;
+  border-radius: 50%;
+  line-height:15px;
+  font-size: 12px;
+  padding: 5px;
 }
 
 

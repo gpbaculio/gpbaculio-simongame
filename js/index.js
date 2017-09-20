@@ -14,7 +14,7 @@ var audioB        = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3
     power         = false, // on = true, off = false
     strict        = false,
     start         = false,
-    level         = 1,
+    level         = 0,
     responseInTime = 0,
     playerChallenge,
     playerChallengeResponse;
@@ -32,26 +32,6 @@ var red    = new Button( redId, audioR ),
     green  = new Button( greenId, audioG ),
     yellow = new Button( yellowId, audioY ),
     blue   = new Button( blueId, audioB );
-
-var start = function() {
-  $('.start').click(function() {
-    stopTimer();
-    if (power === true) {
-      level = 0;
-      playerChallenge = [];
-      makeChallenge();
-    }
-  });
-}
-function toggleSwitch() {
-  $('.power').click(function(e) {
-    e.preventDefault();
-    initialize();
-    power = !power;
-    console.log("power = ", power)
-    start();
-  });
-}
 
 function initialize() {
   setTimeout(function() {
@@ -79,7 +59,25 @@ function stopTimer() {
 }
 
 function makeChallenge() {
+    level+=1;
+    if(level === 21) {
+      applauseAudio.play()
+      $('.level').text('You');
+      $('.level').css("color", "green");
+      $('.level-text').text('Win!');
+      $('.level-text').css("color", "green");
+      level = 0;
+      start = false;
+      strict = false;
+      playerChallenge = [];
+      return;
+    } else {
+      $('.level').css({ 'color': '#333' });
+      $('.level-text').css({ 'color': '#333' });
+    }
     var r = Math.round(Math.random() * 3);
+    $('.level').text(level);
+    $('.level-text').text('level');
     switch (r) {
       case 0:
         playerChallenge.push(red);
@@ -121,7 +119,17 @@ function timer() {
   stopTimer();
   responseInTime = setTimeout(function() {
     if (power === true) {
+      $('.level').text('X');
+      $( ".level" ).css("color", "red");
+      $( ".level" ).css("fontSize", "25px");
+      $( ".level" ).css("lineHeight", "50px");
+      $('.level-text').text(' ');
       errorAudio.play();
+      setTimeout(function() {
+        $('.level').text(level);
+        $(".level").css({ 'lineHeight' : '', 'color' : '#333', 'fontSize': '14px' });
+        $('.level-text').text('level');
+      }, 450);
       setTimeout(function() {
           playChallenge();
       }, 300);
@@ -141,12 +149,28 @@ function checkResponse() {
       makeChallenge(); // make challenge, note that we are increasing level each time we invoke makeChallenge()
     }, 400);
   } else if (correct !== playerChallengeResponse.length) { // wrong response, playChallenge again
+    $('.level').text('X');
+    $( ".level" ).css("color", "red");
+    $( ".level" ).css("fontSize", "25px");
+    $( ".level" ).css("lineHeight", "50px");
+    $('.level-text').text(' ');
     errorAudio.play();
+    setTimeout(function() {
+      $('.level').text(level);
+      $(".level").css({ 'lineHeight' : '', 'color' : '#333', 'fontSize': '14px' });
+      $('.level-text').text('level');
+    }, 450);
     if (strict === false) {
       setTimeout(function() {
         playChallenge();
       }, 400);
-    } 
+    } else if (strict === true) {
+      level = 0;
+      playerChallenge = [];
+      setTimeout(function() {
+        makeChallenge();
+      }, 400);
+    }
   } else if (correct === playerChallengeResponse.length && playerChallenge.length !== playerChallengeResponse.length) { // all players response are correct but it didn't respond in time
     timer();
   }
@@ -154,7 +178,59 @@ function checkResponse() {
 
 
 $(document).ready(function() {
-  toggleSwitch();
+  // display level
+  $('.level').text(level);
+
+  //replay button
+  $('.replay').click(function() {
+    clearTimeout(responseInTime)
+    setTimeout(function() {
+        playChallenge();
+      }, 100);
+  })
+
+  // power button
+  $('.power').click(function(e) {
+    e.preventDefault();
+    initialize();
+    power = !power;
+    if(power === true) {
+      $('.power').addClass("active");
+    } else {
+      start = false;
+      strict = false;
+      $('.power').removeClass("active");
+      $('.start').removeClass("active");
+      $('.strict').removeClass("active");
+    }
+  });
+
+  // start button
+  $('.start').click(function(e) {
+    stopTimer();
+    start = !start;
+    if(start === true) {
+      $('.start').addClass("active");
+    } else {
+      $('.start').removeClass("active");
+    }
+    if (power === true && start === true) {
+      level = 0;
+      playerChallenge = [];
+      makeChallenge();
+    }
+  });
+
+  // strict button
+  $('.strict').click(function() {
+    strict = !strict;
+    if(strict === true) {
+      $('.strict').addClass("active");
+    } else {
+      $('.strict').removeClass("active");
+    }
+  });
+
   $(redId).click(function(e) {
     stopTimer();
     e.preventDefault();
